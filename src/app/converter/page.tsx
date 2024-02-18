@@ -199,14 +199,14 @@ function base4ToBinary(base4:string) {
       
       
       <h1>Enter a number</h1>
-      <input min='0' value={number} onChange={(e) => setNumber(e.target.value)}></input>
+      <input data-testid="number-input" min='0' value={number} onChange={(e) => setNumber(e.target.value)}></input>
       <h1>From base</h1>
-      <input type='number' min='0' value={source} onChange={(e) => setSource(e.target.value)}></input>
+      <input data-testid="source-base-input" type='number' min='0' value={source} onChange={(e) => setSource(e.target.value)}></input>
       
       <h1>To base</h1>
-      <input type='number' min='0' value={destination} onChange={(e) => setDestination(e.target.value)}></input>
-      <text>Result:{result}</text>
-      <button className='button' onClick={handleConversion}>Submit</button>
+      <input data-testid="destination-base-input" type='number' min='0' value={destination} onChange={(e) => setDestination(e.target.value)}></input>
+      <text data-testid="result">Result:{result}</text>
+      <button data-testid="submit-button" className='button' onClick={handleConversion}>Submit</button>
 
        
       </div>
