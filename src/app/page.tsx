@@ -4,7 +4,11 @@
 function Title()
 {
   return(
-    <div >Number Converter</div>
+    <div >
+      
+      <h1>Number Converter</h1>
+      <h1>Vela Paul</h1>
+      </div>
   )
 }
 

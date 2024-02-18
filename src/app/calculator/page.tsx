@@ -6,7 +6,7 @@ import { checkIfNumberValid } from '../utils'
 
 export default function Calculator() {
 
-
+    //Declare the state variables, and the functions to update them via React hooks
     let [first, setFirst] = useState('')
     let [second, setSecond] = useState('')
     let [base, setBase] = useState(0)
@@ -16,7 +16,7 @@ export default function Calculator() {
 
     function add () {
 
-    
+    //Initialise the variables
     let len_first = first.length; 
     let a, b, len_a, len_b;
     let len_second = second.length; 
@@ -36,7 +36,8 @@ export default function Calculator() {
         s += "0"; 
        
     // Condition to check if the strings 
-    // have lengths mis-match 
+    // have lengths mis-match
+    // if they do etend the length of the smaller string 
     if (len_a < len_b) 
         a = s + a; 
     else
@@ -50,8 +51,7 @@ export default function Calculator() {
             i > -1; i--) 
     { 
          
-        // Current Place value for 
-        // the resultant sum 
+        // Current value of the sum 
         curr = carry + (a.charCodeAt(i) - '0'.charCodeAt(0)) + (b.charCodeAt(i) - '0'.charCodeAt(0)); 
    
         // Update carry 
@@ -64,17 +64,22 @@ export default function Calculator() {
         sum = String.fromCharCode(
             curr + '0'.charCodeAt(0)) + sum; 
     } 
+    //If there is a carry left over, add it to the front of the number
     if (carry > 0) 
         sum = String.fromCharCode(
             carry + '0'.charCodeAt(0)) + sum; 
              
+    sum = sum.replace(/^0+/, '');
     setResult(sum)
     } 
 
     function sub() {
+        //Check if the first number is greater than the second number
 
-
-        
+        if(first < second) {
+            setResult('First Number must be greater than second number')
+            return
+        }
         let len_first = first.length;
         let len_second = second.length;
         let diff = Math.abs(len_first - len_second);
@@ -85,6 +90,10 @@ export default function Calculator() {
         let borrow = 0;
   
 
+
+        // Condition to check if the strings 
+        // have lengths mis-match
+        // if they do etend the length of the smaller string 
         for(let i = 1; i <= diff; i++) {
             s += "0";
         }
@@ -96,6 +105,9 @@ export default function Calculator() {
         }
     
         for(let i = Math.max(len_first, len_second) - 1; i > -1; i--) {
+            
+            //Calculate the difference between the two numbers
+            //and update the borrow if necessary
             let curr = (a.charCodeAt(i) - '0'.charCodeAt(0)) - (b.charCodeAt(i) - '0'.charCodeAt(0)) + borrow;
     
             if (curr < 0) {
@@ -111,7 +123,7 @@ export default function Calculator() {
         if (borrow < 0) {
             r = String.fromCharCode(Math.abs(borrow) + '0'.charCodeAt(0)) + r;
         }
-    
+        r = r.replace(/^0+/, '');
         setResult(r);
     }
 
@@ -119,12 +131,18 @@ export default function Calculator() {
     
     function mul () {
 
-
+        //Check if second number is digit
+        if(second.length != 1){
+            setResult('Second number must be a single digit')
+            return
+        }
         let carry = 0;
         let r = "";
 
+        //Iterate through each digit of the first number and multiply it by the second number
         for(let i = first.length - 1; i >= 0; i--) {
             let temp = parseInt(first[i], 10) * parseInt(second, 10) + carry;
+            //add the result(modulo base) to the front of the number
             r = (temp % base).toString(base)+r;
             carry = Math.floor(temp / base);
           
@@ -135,6 +153,13 @@ export default function Calculator() {
         setResult(r);
     }
     function div () {
+
+
+        if(second.length != 1){
+            setResult('Second number must be a single digit')
+            return
+        }
+
         let r = "";
         let temp = 0;
         let digit = parseInt(second, base);
@@ -162,11 +187,11 @@ export default function Calculator() {
         
         try {
             if (checkIfNumberValid(first, base) == false || checkIfNumberValid(second, base) == false) {
-                setResult('Invalid input')
+                setResult("Numbers don't exist in the given base")
                 return
             }
         
-            console.log(first, second, base, operator)
+            //Determine the type of operation and act accordingly
             if (operator == '+')
                 add()
             if (operator == '-')
@@ -198,8 +223,8 @@ export default function Calculator() {
             <select value={operator} onChange={(e)=> setOperator(e.target.value)}>
                 <option value='+'>+</option>
                 <option value='-'>-</option>
-                <option value='*'>*</option>
-                <option value='/'>/</option>
+                <option value='*'>* (second number must be digit)</option>
+                <option value='/'>/ (second number must be digit)</option>
             </select>
             <button className='button' onClick={handleCalculation}>Submit</button>
             <text>Result:{result}</text>
