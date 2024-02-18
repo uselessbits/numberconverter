@@ -16,11 +16,12 @@ export default function Page() {
   let [result, setResult] = useState('')  
 
 
-  function division(num){
+  function division(num: number){
     
     let r = "";
     let d = parseInt(destination, 10)
 
+    
     do{
 
     
@@ -35,7 +36,7 @@ export default function Page() {
   }
 
 
-  function substitution(num){
+  function substitution(num:string){
     let r = 0;
     let s = parseInt(source, 10)
     let power = 0;
@@ -51,7 +52,7 @@ export default function Page() {
 
 
 
-  function binaryToHex(binary) {
+  function binaryToHex(binary:string) {
     // Pad the binary number with zeros on the left to make its length a multiple of 4
     while (binary.length % 4 !== 0) {
         binary = '0' + binary;
@@ -60,13 +61,18 @@ export default function Page() {
     // Split the binary number into groups of 4 digits
     let groups = binary.match(/.{1,4}/g);
 
-    // Convert each group to a hexadecimal digit
-    let hex = groups.map(group => parseInt(group, 2).toString(16)).join('');
+    // Add null check for 'groups' variable
+    if (groups !== null) {
+      // Convert each group to a hexadecimal digit
+      let hex = groups.map(group => parseInt(group, 2).toString(16)).join('');
 
-    return hex;
-}
+      return hex;
+    }
 
-function binaryToOctal(binary) {
+    return '';
+  }
+
+function binaryToOctal(binary:string) {
   // Pad the binary number with zeros on the left to make its length a multiple of 3
   while (binary.length % 3 !== 0) {
       binary = '0' + binary;
@@ -75,13 +81,18 @@ function binaryToOctal(binary) {
   // Split the binary number into groups of 3 digits
   let groups = binary.match(/.{1,3}/g);
 
-  // Convert each group to an octal digit
-  let octal = groups.map(group => parseInt(group, 2).toString(8)).join('');
+  // Add null check for 'groups' variable
+  if (groups !== null) {
+    // Convert each group to an octal digit
+    let octal = groups.map(group => parseInt(group, 2).toString(8)).join('');
 
-  return octal;
+    return octal;
+  }
+
+  return '';
 }
 
-function binaryToBase4(binary) {
+function binaryToBase4(binary:string) {
   // Pad the binary number with zeros on the left to make its length a multiple of 2
   while (binary.length % 2 !== 0) {
       binary = '0' + binary;
@@ -90,22 +101,27 @@ function binaryToBase4(binary) {
   // Split the binary number into groups of 2 digits
   let groups = binary.match(/.{1,2}/g);
 
-  // Convert each group to a base 4 digit
-  let base4 = groups.map(group => parseInt(group, 2).toString(4)).join('');
+  // Add null check for 'groups' variable
+  if (groups !== null) {
+    // Convert each group to a base 4 digit
+    let base4 = groups.map(group => parseInt(group, 2).toString(4)).join('');
 
-  return base4;
+    return base4;
+  }
+
+  return '';
 }
 
-function hexToBinary(hex) {
-  console.log(hex)
+function hexToBinary(hex:string) {
+  
   let binary = hex.split('').map(digit => parseInt(digit, 16).toString(2).padStart(4, '0')).join('');
   return binary;
 }
-function octalToBinary(octal) {
+function octalToBinary(octal:string) {
   let binary = octal.split('').map(digit => parseInt(digit, 8).toString(2).padStart(3, '0')).join('');
   return binary;
 }
-function base4ToBinary(base4) {
+function base4ToBinary(base4:string) {
   let binary = base4.split('').map(digit => parseInt(digit, 4).toString(2).padStart(2, '0')).join('');
   return binary;
 }

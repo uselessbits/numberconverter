@@ -1,6 +1,7 @@
 "use client"
 import React from 'react'
 import { useState } from 'react'
+import { checkIfNumberValid } from '../utils'
 
 
 export default function Calculator() {
@@ -54,7 +55,7 @@ export default function Calculator() {
         curr = carry + (a.charCodeAt(i) - '0'.charCodeAt(0)) + (b.charCodeAt(i) - '0'.charCodeAt(0)); 
    
         // Update carry 
-        carry = parseInt(curr / base, 10);
+        carry = curr / base;
    
         // Find current digit 
         curr = curr % base; 
@@ -160,7 +161,7 @@ export default function Calculator() {
     function handleCalculation() {
         
         try {
-            if (first>=base || second>=base) {
+            if (checkIfNumberValid(first, base) == false || checkIfNumberValid(second, base) == false) {
                 setResult('Invalid input')
                 return
             }
@@ -192,7 +193,7 @@ export default function Calculator() {
             <h1>Second Number</h1>
             <input type='number' min='0' value={second} onChange={(e) => setSecond(e.target.value)}></input>
             <h1 >Base</h1>
-            <input type='number' min='0' value={base} onChange={(e) => setBase(e.target.value)}></input>
+            <input type='number' min='0' value={base} onChange={(e) => setBase(parseInt(e.target.value,10))}></input>
 
             <select value={operator} onChange={(e)=> setOperator(e.target.value)}>
                 <option value='+'>+</option>
