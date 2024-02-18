@@ -6,7 +6,7 @@ import { checkIfNumberValid } from '../utils'
 
 
 
-export default function page() {
+export default function Page() {
 
 
   
