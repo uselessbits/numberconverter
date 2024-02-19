@@ -1,12 +1,11 @@
 export function checkIfNumberValid(number:string, base:number){
-  let valid = true
+  
   for(let i = 0; i < number.length; i++){
-    if(parseInt(number[i],10) >= base){
-      valid = false
-      break
+    if(isNaN(parseInt(number[i],base)) || parseInt(number[i],base) < 0 || parseInt(number[i],base) >= base){
+      return false
     }
   }
-  return valid
+  return true
 
 
 }

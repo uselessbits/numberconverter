@@ -41,7 +41,7 @@ export default function Page() {
     let power = 0;
 
     for(let i = num.length - 1; i >= 0; i--){
-      r += (parseInt(num[i], 10)) * (s ** power)
+      r += (parseInt(num[i], s)) * (s ** power)
       power += 1
     }
   

@@ -52,22 +52,20 @@ export default function Calculator() {
     { 
          
         // Current value of the sum 
-        curr = carry + (a.charCodeAt(i) - '0'.charCodeAt(0)) + (b.charCodeAt(i) - '0'.charCodeAt(0)); 
+        curr = carry + parseInt(a,base) + parseInt(b,base) ; 
    
         // Update carry 
-        carry = curr / base;
+        carry = Math.floor(curr / base);
    
         // Find current digit 
         curr = curr % base; 
    
         // Update sum result 
-        sum = String.fromCharCode(
-            curr + '0'.charCodeAt(0)) + sum; 
+        sum = curr.toString(base) + sum; 
     } 
     //If there is a carry left over, add it to the front of the number
     if (carry > 0) 
-        sum = String.fromCharCode(
-            carry + '0'.charCodeAt(0)) + sum; 
+     sum = carry.toString(base) + sum; 
              
     sum = sum.replace(/^0+/, '');
     setResult(sum)
@@ -76,7 +74,7 @@ export default function Calculator() {
     function sub() {
         //Check if the first number is greater than the second number
 
-        if(first < second) {
+        if(parseInt(first,base) < parseInt(second, base)) {
             setResult('First Number must be greater than second number')
             return
         }
@@ -108,8 +106,8 @@ export default function Calculator() {
             
             //Calculate the difference between the two numbers
             //and update the borrow if necessary
-            let curr = (a.charCodeAt(i) - '0'.charCodeAt(0)) - (b.charCodeAt(i) - '0'.charCodeAt(0)) + borrow;
-    
+            let curr = parseInt(a[i],base) - parseInt(b[i],base) + borrow;
+            console.log(curr)
             if (curr < 0) {
                 curr += base;
                 borrow = -1;
@@ -117,7 +115,7 @@ export default function Calculator() {
                 borrow = 0;
             }
     
-            r = String.fromCharCode(curr + '0'.charCodeAt(0)) + r;
+            r = curr.toString(base) + r;
         }
     
         if (borrow < 0) {
@@ -141,7 +139,7 @@ export default function Calculator() {
 
         //Iterate through each digit of the first number and multiply it by the second number
         for(let i = first.length - 1; i >= 0; i--) {
-            let temp = parseInt(first[i], 10) * parseInt(second, 10) + carry;
+            let temp = parseInt(first[i], base) * parseInt(second, base) + carry;
             //add the result(modulo base) to the front of the number
             r = (temp % base).toString(base)+r;
             carry = Math.floor(temp / base);
@@ -186,8 +184,10 @@ export default function Calculator() {
     function handleCalculation() {
         
         try {
+            console.log(checkIfNumberValid(first, base), checkIfNumberValid(second, base))
             if (checkIfNumberValid(first, base) == false || checkIfNumberValid(second, base) == false) {
                 setResult("Numbers don't exist in the given base")
+                
                 return
             }
         
@@ -214,9 +214,9 @@ export default function Calculator() {
         <div>
             <h1>Calculator</h1>
             <h1>First Number</h1>
-            <input type='number' min='0' value={first} onChange={(e) => setFirst(e.target.value)}></input>
+            <input  min='0' value={first} onChange={(e) => setFirst(e.target.value)}></input>
             <h1>Second Number</h1>
-            <input type='number' min='0' value={second} onChange={(e) => setSecond(e.target.value)}></input>
+            <input  min='0' value={second} onChange={(e) => setSecond(e.target.value)}></input>
             <h1 >Base</h1>
             <input type='number' min='0' value={base} onChange={(e) => setBase(parseInt(e.target.value,10))}></input>
 
