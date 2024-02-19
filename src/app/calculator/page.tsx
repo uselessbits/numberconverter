@@ -172,7 +172,7 @@ export default function Calculator() {
             }
     
             let quotient = Math.floor(temp / digit);
-            r += quotient.toString();
+            r += quotient.toString(base);
             temp = temp % digit;
         }
     
