@@ -7,20 +7,20 @@ import { checkIfNumberValid } from '../utils'
 export default function Calculator() {
 
     //Declare the state variables, and the functions to update them via React hooks
-    let [first, setFirst] = useState('')
-    let [second, setSecond] = useState('')
-    let [base, setBase] = useState(0)
-    let [operator, setOperator] = useState('+')
-    let [result, setResult] = useState('')
+    let [first, setFirst] = useState('')//String
+    let [second, setSecond] = useState('')//String
+    let [base, setBase] = useState(0)//Int
+    let [operator, setOperator] = useState('+')//String
+    let [result, setResult] = useState('')//String
 
 
     function add () {
 
     //Initialise the variables
-    let len_first = first.length; 
-    let a, b, len_a, len_b;
-    let len_second = second.length; 
-    let sum, s; 
+    let len_first = first.length;//Int 
+    let a, b, len_a, len_b;//Int
+    let len_second = second.length;//Int 
+    let sum, s; //Strings
     s = ""; 
     sum = ""; 
     let diff; 
@@ -80,14 +80,14 @@ export default function Calculator() {
             setResult('First Number must be greater than second number')
             return
         }
-        let len_first = first.length;
-        let len_second = second.length;
-        let diff = Math.abs(len_first - len_second);
-        let s = "";
-        let r = "";
-        let a = first;
-        let b = second;
-        let borrow = 0;
+        let len_first = first.length;//Int
+        let len_second = second.length;//Int
+        let diff = Math.abs(len_first - len_second);//Int
+        let s = "";//String
+        let r = "";//String
+        let a = first;//String
+        let b = second;//String
+        let borrow = 0;//Int
   
 
 
@@ -136,8 +136,8 @@ export default function Calculator() {
             setResult('Second number must be a single digit')
             return
         }
-        let carry = 0;
-        let r = "";
+        let carry = 0;//Int
+        let r = "";//String
 
         //Iterate through each digit of the first number and multiply it by the second number
         for(let i = first.length - 1; i >= 0; i--) {
@@ -160,9 +160,9 @@ export default function Calculator() {
             return
         }
 
-        let r = "";
-        let temp = 0;
-        let digit = parseInt(second, base);
+        let r = "";//String
+        let temp = 0;//Int
+        let digit = parseInt(second, base);//Int
     
         for (let i = 0; i < first.length; i++) {
             temp = temp * base + (first.charCodeAt(i) - '0'.charCodeAt(0));
