@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState } from 'react'
 import { checkIfNumberValid } from '../utils'
+import { parse } from 'path'
 
 
 export default function Calculator() {
@@ -52,7 +53,7 @@ export default function Calculator() {
     { 
          
         // Current value of the sum 
-        curr = carry + parseInt(a,base) + parseInt(b,base) ; 
+        curr = carry + parseInt(a[i],base) + parseInt(b[i],base) ; 
    
         // Update carry 
         carry = Math.floor(curr / base);
@@ -163,7 +164,7 @@ export default function Calculator() {
         let digit = parseInt(second, base);//Int
     
         for (let i = 0; i < first.length; i++) {
-            temp = temp * base + (first.charCodeAt(i) - '0'.charCodeAt(0));
+            temp = temp * base + parseInt(first[i], base);
     
             if (temp < digit) {
                 r += "0";
