@@ -10,16 +10,16 @@ export default function Page() {
 
 
   
-  let [number, setNumber] = useState('')
-  let [source, setSource] = useState('')
-  let [destination, setDestination] = useState('')
-  let [result, setResult] = useState('')  
+  let [number, setNumber] = useState('')//String
+  let [source, setSource] = useState('')//String
+  let [destination, setDestination] = useState('')//String
+  let [result, setResult] = useState('')//String
 
 
   function division(num: number){
     //Use repeated division to convert the number to the desired base
-    let r = "";
-    let d = parseInt(destination, 10)
+    let r = "";//String
+    let d = parseInt(destination, 10)//Int
 
     do{
 
@@ -37,7 +37,7 @@ export default function Page() {
   function substitution(num:string){
     //Use substitution to convert the number 
     let r = 0;
-    let s = parseInt(source, 10)
+    let s = parseInt(source, 10)//Int
     let power = 0;
 
     for(let i = num.length - 1; i >= 0; i--){
@@ -46,7 +46,7 @@ export default function Page() {
     }
   
   
-    return r.toString()
+    return r.toString()//Return String
   }
 
 
